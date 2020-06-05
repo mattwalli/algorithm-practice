@@ -11,4 +11,4 @@ import timeit
 exec_time = timeit.timeit('test_function()', number = 1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 
-# built in sort: ~0.34 sec
+# built in sort: ~0.34sec @ 1M grows at nlogn
