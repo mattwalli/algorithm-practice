@@ -12,7 +12,7 @@ class UF:
         q_root = self.find(q)
         if p_root == q_root:
             return
-        if self.sz[p_root] < self.sz[p_root]:
+        if self.sz[p_root] < self.sz[q_root]:
             self.id[p_root] = q_root
             self.sz[q_root] += self.sz[p_root]
         else:
@@ -32,8 +32,8 @@ class UF:
         return self.cnt
 
 #f = open("tinyUF.txt")
-f = open("mediumUF.txt")
-#f = open("largeUF.txt")
+#f = open("mediumUF.txt")
+f = open("largeUF.txt")
 uf = UF(int(f.readline()))
 while True:
     ln = f.readline()
