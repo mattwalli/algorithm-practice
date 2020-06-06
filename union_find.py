@@ -14,19 +14,19 @@ class UF:
             return
         if self.sz[p_root] < self.sz[q_root]:
             self.id[p_root] = q_root
-            #self.sz[q_root] += self.sz[p_root]
+            self.sz[q_root] += self.sz[p_root]
         else:
             self.id[q_root] = p_root
-            #self.sz[p_root] += self.sz[q_root]
+            self.sz[p_root] += self.sz[q_root]
         self.cnt -= 1
 
     def find(self, p):
-        size = 1
+        #size = 1
         while p != self.id[p]:
             p = self.id[p]
-            size += 1
-        if size > self.sz[p]:
-            self.sz[p] = size
+            #size += 1
+        #if size > self.sz[p]:
+            #self.sz[p] = size
         return p
 
     def connected(self, p, q):
