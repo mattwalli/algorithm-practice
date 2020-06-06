@@ -21,12 +21,14 @@ class UF:
         self.cnt -= 1
 
     def find(self, p):
-        #size = 1
+        start_p = p
         while p != self.id[p]:
             p = self.id[p]
-            #size += 1
-        #if size > self.sz[p]:
-            #self.sz[p] = size
+        # Path compression
+        while start_p != self.id[start_p]:
+            last_p = start_p
+            start_p = self.id[start_p]
+            self.id[last_p] = p
         return p
 
     def connected(self, p, q):
@@ -51,5 +53,6 @@ while True:
     uf.union(p, q)
     #print(f"{p} {q}")
 print(f"{uf.count()} components")
+print(max(uf.sz))
 
 f.close()
