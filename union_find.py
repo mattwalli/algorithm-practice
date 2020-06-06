@@ -14,16 +14,15 @@ class UF:
             return
         if self.sz[p_root] < self.sz[p_root]:
             self.id[p_root] = q_root
+            self.sz[q_root] += self.sz[p_root]
         else:
             self.id[q_root] = p_root
+            self.sz[p_root] += self.sz[q_root]
         self.cnt -= 1
 
     def find(self, p):
-        new_size = 1
         while p != self.id[p]:
             p = self.id[p]
-            new_size += 1
-        self.sz[p] = new_size
         return p
 
     def connected(self, p, q):
@@ -33,8 +32,8 @@ class UF:
         return self.cnt
 
 #f = open("tinyUF.txt")
-#f = open("mediumUF.txt")
-f = open("largeUF.txt")
+f = open("mediumUF.txt")
+#f = open("largeUF.txt")
 uf = UF(int(f.readline()))
 while True:
     ln = f.readline()
