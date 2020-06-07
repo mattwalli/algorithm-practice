@@ -13,6 +13,15 @@ def insertion_sort(data):
             data[j], data[j-1] = data[j-1], data[j]
             j -= 1
 
+def insertion_sort_2(data):
+    for i in range(1, len(data)):
+        j = i
+        temp = data[j]
+        while j > 0 and temp < data[j-1]:
+            data[j] = data[j-1]
+            j -= 1
+        data[j] = temp
+
 def is_sorted(data):
     for i in range(1, len(data)):
         if data[i] < data[i-1]:
@@ -22,9 +31,9 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(10000):
+for n in range(20000):
     data.append(randint(0, 1000000))
 
-exec_time = timeit('insertion_sort(data)', number = 1, globals=globals())
+exec_time = timeit('insertion_sort_2(data)', number=1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 print(f"Is sorted: {is_sorted(data)}")
