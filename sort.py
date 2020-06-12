@@ -74,8 +74,18 @@ def quick_sort(data):
         data[low], data[j] = data[j], data[low]
         return j
     
+    def insertion(low, high):
+        for i in range(low + 1, high + 1):
+            j = i
+            temp = data[j]
+            while j > low and temp < data[j-1]:
+                data[j] = data[j-1]
+                j -= 1
+            data[j] = temp
+    
     def sort(low, high):
-        if low >= high:
+        if high - low <= 15:
+            insertion(low, high)
             return
         pivot = partition(low, high)
         sort(low, pivot - 1)
@@ -93,13 +103,8 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(400000):
+for n in range(800000):
     data.append(randint(0, 1000000))
-
-print("Sorting...")
-exec_time = timeit('quick_sort(data)', number=1, globals=globals())
-print(f"Execution time: {exec_time} seconds")
-print(f"Is sorted: {is_sorted(data)}")
 
 print("Sorting...")
 exec_time = timeit('quick_sort(data)', number=1, globals=globals())
