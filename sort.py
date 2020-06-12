@@ -60,7 +60,7 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(40000):
+for n in range(100000):
     data.append(randint(0, 1000000))
 
 exec_time = timeit('merge_sort(data)', number=1, globals=globals())
