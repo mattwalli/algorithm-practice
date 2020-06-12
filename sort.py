@@ -81,7 +81,7 @@ def quick_sort(data):
         sort(low, pivot - 1)
         sort(pivot + 1, high)
     
-    #shuffle(data)
+    shuffle(data)
     sort(0, len(data) - 1)
 
 def is_sorted(data):
@@ -93,8 +93,13 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(800000):
+for n in range(400000):
     data.append(randint(0, 1000000))
+
+print("Sorting...")
+exec_time = timeit('quick_sort(data)', number=1, globals=globals())
+print(f"Execution time: {exec_time} seconds")
+print(f"Is sorted: {is_sorted(data)}")
 
 print("Sorting...")
 exec_time = timeit('quick_sort(data)', number=1, globals=globals())
