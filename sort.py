@@ -51,6 +51,35 @@ def merge_sort(data):
 
     sort(data, 0, len(data) - 1)
 
+from random import shuffle
+def quick_sort(data):
+
+    def partition(data, low, high):
+        i, j = low, high + 1
+        while True:
+            while True:
+                i += 1
+                if i == high or data[i] >= data[low]:
+                    break
+            while True:
+                j -= 1
+                if j == low or data[j] <= data[low]:
+                    break
+            if i >= j:
+                break
+            data[i], data[j] = data[j], data[i]
+        data[low], data[j] = data[j], data[low]
+        return j
+    
+    def sort(data, low, high):
+        if low >= high:
+            return
+        pivot = partition(data, low, high)
+        sort(data, low, pivot - 1)
+        sort(data, pivot + 1, high)
+    
+    sort(data, 0, len(data) - 1)
+
 def is_sorted(data):
     for i in range(1, len(data)):
         if data[i] < data[i-1]:
@@ -60,9 +89,9 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(100000):
+for n in range(800000):
     data.append(randint(0, 1000000))
 
-exec_time = timeit('merge_sort(data)', number=1, globals=globals())
+exec_time = timeit('quick_sort(data)', number=1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 print(f"Is sorted: {is_sorted(data)}")
