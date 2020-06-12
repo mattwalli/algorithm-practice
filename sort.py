@@ -74,6 +74,27 @@ def quick_sort(data):
         data[low], data[j] = data[j], data[low]
         return j
     
+    def med3_partition(low, high):
+        insertion(low, low + 2)
+        data[low], data[low+1] = data[low+1], data[low]
+        data[low+2], data[high] = data[high], data[low+2]
+        i, j = low + 1, high
+        v = data[low]
+        while True:
+            while True:
+                i += 1
+                if data[i] >= v:
+                    break
+            while True:
+                j -= 1
+                if data[j] <= v:
+                    break
+            if i >= j:
+                break
+            data[i], data[j] = data[j], data[i]
+        data[low], data[j] = data[j], data[low]
+        return j
+    
     def insertion(low, high):
         for i in range(low + 1, high + 1):
             j = i
@@ -87,7 +108,7 @@ def quick_sort(data):
         if high - low <= 15:
             insertion(low, high)
             return
-        pivot = partition(low, high)
+        pivot = med3_partition(low, high)
         sort(low, pivot - 1)
         sort(pivot + 1, high)
     
