@@ -24,8 +24,11 @@ def insertion_sort_2(data):
 
 def merge_sort(data):
 
-    def merge(data, low, mid, high):
-        copy = data.copy()
+    copy = [0] * len(data)
+
+    def merge(low, mid, high):
+        for a in range(low, high + 1):
+            copy[a] = data[a]
         i, j = low, mid+1
         for k in range(low, high+1):
             if i > mid:
@@ -41,20 +44,20 @@ def merge_sort(data):
                 data[k] = copy[j]
                 j += 1
     
-    def sort(data, low, high):
+    def sort(low, high):
         if (high - low) <= 0:
             return
         mid = low + (high - low) // 2
-        sort(data, low, mid)
-        sort(data, mid+1, high)
-        merge(data, low, mid, high)
+        sort(low, mid)
+        sort(mid+1, high)
+        merge(low, mid, high)
 
-    sort(data, 0, len(data) - 1)
+    sort(0, len(data) - 1)
 
 from random import shuffle
 def quick_sort(data):
 
-    def partition(data, low, high):
+    def partition(low, high):
         i, j = low, high + 1
         while True:
             while True:
@@ -71,14 +74,15 @@ def quick_sort(data):
         data[low], data[j] = data[j], data[low]
         return j
     
-    def sort(data, low, high):
+    def sort(low, high):
         if low >= high:
             return
-        pivot = partition(data, low, high)
-        sort(data, low, pivot - 1)
-        sort(data, pivot + 1, high)
+        pivot = partition(low, high)
+        sort(low, pivot - 1)
+        sort(pivot + 1, high)
     
-    sort(data, 0, len(data) - 1)
+    #shuffle(data)
+    sort(0, len(data) - 1)
 
 def is_sorted(data):
     for i in range(1, len(data)):
@@ -92,6 +96,7 @@ data = list()
 for n in range(800000):
     data.append(randint(0, 1000000))
 
+print("Sorting...")
 exec_time = timeit('quick_sort(data)', number=1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 print(f"Is sorted: {is_sorted(data)}")

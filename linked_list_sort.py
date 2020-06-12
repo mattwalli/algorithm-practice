@@ -108,6 +108,7 @@ class LinkedList:
 
 llist = LinkedList()
 llist.fill_random(800000, 0, 1000000)
+print("Sorting...")
 exec_time = timeit('llist.merge_sort()', number=1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 print(f"Is sorted: {llist.is_sorted()}")
