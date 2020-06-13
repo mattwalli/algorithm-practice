@@ -115,6 +115,35 @@ def quick_sort(data):
     shuffle(data)
     sort(0, len(data) - 1)
 
+def quick_sort_3way(data):
+
+    def partition(low, high):
+        lt = low
+        i = low + 1
+        gt = high
+        v = data[low]
+        while i <= gt:
+            if data[i] < v:
+                data[lt], data[i] = data[i], data[lt]
+                lt += 1
+                i += 1
+            elif data[i] > v:
+                data[i], data[gt] = data[gt], data[i]
+                gt -= 1
+            else:
+                i += 1
+        return lt, gt
+
+    def sort(low, high):
+        if low >= high:
+            return
+        lt, gt = partition(low, high)
+        sort(low, lt - 1)
+        sort(gt + 1, high)
+    
+    shuffle(data)
+    sort(0, len(data) - 1)
+
 def is_sorted(data):
     for i in range(1, len(data)):
         if data[i] < data[i-1]:
@@ -124,10 +153,10 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(800000):
-    data.append(randint(0, 1000000))
+for n in range(100000):
+    data.append(randint(0, 100))
 
 print("Sorting...")
-exec_time = timeit('quick_sort(data)', number=1, globals=globals())
+exec_time = timeit('quick_sort_3way(data)', number=1, globals=globals())
 print(f"Execution time: {exec_time} seconds")
 print(f"Is sorted: {is_sorted(data)}")
