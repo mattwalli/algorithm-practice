@@ -134,10 +134,54 @@ def quick_sort_3way(data):
                 i += 1
         return lt, gt
 
+    def partition_b(low, high):
+        p = i = low + 1
+        j = q = high
+        v = data[low]
+        while True:
+            while data[i] < v and i < j:
+                if data[i] == v:
+                    data[p], data[i] = data[i], data[p]
+                    p += 1
+                i += 1
+            while data[j] > v and j > i:
+                if data[j] == v:
+                    data[j], data[q] = data[q], data[j]
+                    q -= 1
+                j -= 1
+            if j <= i:
+                break
+            data[j], data[i] = data[i], data[j]
+            i += 1
+            j -= 1
+        p = low
+        while True:
+            if data[j] == v:
+                lt = p - 1
+                break
+            if data[p] == v:
+                lt = j
+                break
+            data[p], data[j] = data[j], data[p]
+            p += 1
+            j -= 1
+        q = high
+        while True:
+            if data[i] == v:
+                gt = q + 1
+                break
+            if data[q] == v:
+                gt = i
+                break
+            data[q], data[i] = data[i], data[q]
+            i += 1
+            q -= 1
+        return lt, gt
+
     def sort(low, high):
         if low >= high:
             return
-        lt, gt = partition(low, high)
+        lt, gt = partition_b(low, high)
         sort(low, lt - 1)
         sort(gt + 1, high)
     
@@ -153,8 +197,8 @@ def is_sorted(data):
 from timeit import timeit
 from random import randint
 data = list()
-for n in range(100000):
-    data.append(randint(0, 100))
+for n in range(400000):
+    data.append(randint(0, 10))
 
 print("Sorting...")
 exec_time = timeit('quick_sort_3way(data)', number=1, globals=globals())
