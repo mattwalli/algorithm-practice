@@ -20,22 +20,22 @@ class RBTree:
         self.root = None
     
     def __str__(self):
-        display = self.__build_str("", self.root, -1, "=")
-        return display
-    
-    def __build_str(self, disp, node, deep, pre):
-        if node == None:
+
+        def build_str(disp, node, deep, pre):
+            if node == None:
+                return disp
+            if self.is_red(node):
+                pre = "|"
+            else:
+                deep += 1
+            disp = build_str(disp, node.right, deep, "/")
+            for i in range(deep):
+                disp += "          "
+            disp += pre + str(node) + "\n"
+            disp = build_str(disp, node.left, deep, "\\")
             return disp
-        if self.is_red(node):
-            pre = "|"
-        else:
-            deep += 1
-        disp = self. __build_str(disp, node.right, deep, "/")
-        for i in range(deep):
-            disp += "          "
-        disp += pre + str(node) + "\n"
-        disp = self. __build_str(disp, node.left, deep, "\\")
-        return disp
+
+        return build_str("", self.root, -1, "=")
 
     def is_red(self, node):
         if node == None:
