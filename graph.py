@@ -37,5 +37,6 @@ class Graph:
     def adj(self, v):
         pass
 
-G = Graph(file_name = "tinyG.txt")
-print(G)
+import sys
+G = Graph(file_name = sys.argv[1])
+print(G.V())
