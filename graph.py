@@ -12,7 +12,7 @@ class Bag:
     def add(self, value):
         self.head = self.Node(value, self.head)
     
-    def has(self):
+    def __iter__(self):
         point = self.head
         while point != None:
             yield point.value
