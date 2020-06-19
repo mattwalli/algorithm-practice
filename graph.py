@@ -1,3 +1,23 @@
+class Bag:
+
+    class Node:
+
+        def __init__(self, value, next):
+            self.value = value
+            self.next = next
+    
+    def __init__(self):
+        self.head = None
+    
+    def add(self, value):
+        self.head = self.Node(value, self.head)
+    
+    def has(self):
+        point = self.head
+        while point != None:
+            yield point.value
+            point = point.next
+
 class Graph:
 
     def __init__(self, vertices = 0, file_name = None):
