@@ -2,18 +2,19 @@ class Graph:
 
     def __init__(self, vertices = 0, file_name = None):
         if file_name == None:
-            self.V = vertices
-            self.E = 0
+            self.vert = vertices
+            self.edge = 0
         else:
             f = open(file_name)
-            self.V = int(f.readline())
-            self.E = int(f.readline())
+            self.vert = int(f.readline())
+            self.edge = int(f.readline())
             while True:
-                line = f.readline()
-                if line == "":
+                ln = f.readline()
+                if ln == "":
                     break
-                edge = line.split()
-                self.add_edge(int(edge[0]), int(edge[1]))
+                e = ln.split()
+                self.add_edge(int(e[0]), int(e[1]))
+            f.close()
 
     def __str__(self):
         s = f"{self.V} vertices, {self.E} edges\n"
@@ -23,6 +24,12 @@ class Graph:
                 s += f"{w} "
             s += "\n"
         return s
+    
+    def V(self):
+        return self.vert
+    
+    def E(self):
+        return self.edge
 
     def add_edge(self, v, w):
         pass
