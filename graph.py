@@ -24,21 +24,20 @@ class Graph:
         if file_name == None:
             self.vert = vertices
             self.edge = 0
+            self.adj_list = [Bag() for _ in range(self.vert)]
         else:
             f = open(file_name)
             self.vert = int(f.readline())
             self.edge = int(f.readline())
-            while True:
-                ln = f.readline()
-                if ln == "":
-                    break
-                e = ln.split()
+            self.adj_list = [Bag() for _ in range(self.vert)]
+            for _ in range(self.edge):
+                e = f.readline().split()
                 self.add_edge(int(e[0]), int(e[1]))
             f.close()
 
     def __str__(self):
         s = f"{self.V} vertices, {self.E} edges\n"
-        for v in range(self.V):
+        for v in range(self.V()):
             s += f"{v}: "
             for w in self.adj(v):
                 s += f"{w} "
@@ -52,11 +51,13 @@ class Graph:
         return self.edge
 
     def add_edge(self, v, w):
-        pass
+        self.adj_list[v].add(w)
+        self.adj_list[w].add(v)
+        self.edge += 1
 
     def adj(self, v):
-        pass
+        return self.adj_list[v]
 
 import sys
 G = Graph(file_name = sys.argv[1])
-print(G.V())
+print(G)
